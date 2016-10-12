@@ -5,7 +5,7 @@ if [ $? -ne 0 ]; then
     vagrant up
 fi
 
-pwd | grep ansible-role-ssh/tests$ -q
+pwd | grep ansible-role-oco/tests$ -q
 if [ $? -ne 0 ]; then
     echo "tests must be run in the ansible-role-oco/tests folder"
     exit 1

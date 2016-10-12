@@ -1,2 +1,9 @@
 ---
 # defaults file for ansible-role-oco
+
+oco_package: "oco-ded.tar.gz"
+oco_package_remote_src: "no"
+oco_unpack_path: "/tmp"
+oco_install_path: "/usr/local/oco"
+
+oco_checks: []

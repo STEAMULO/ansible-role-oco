@@ -1,0 +1,4 @@
+
+oco_checks:
+  - name: "google"
+    command: "curl -o /dev/null --silent --head --write-out \"%{http_code}\" www.google.fr"

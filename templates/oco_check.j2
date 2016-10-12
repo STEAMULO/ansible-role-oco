@@ -1,0 +1,13 @@
+#!/bin/sh
+
+LOGFILE=/var/log/oco_customs.log
+
+{
+
+{% for check in oco_checks %}
+echo "[$(date +%Y-%m-%d:%H:%M:%S)] Running '{{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }}'"
+{{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }}
+echo "\n[$(date +%Y-%m-%d:%H:%M:%S)] Done '{{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }}'\n"
+{% endfor %}
+
+} >> $LOGFILE 2>&1

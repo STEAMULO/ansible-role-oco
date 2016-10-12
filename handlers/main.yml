@@ -1,2 +1,5 @@
 ---
 # handlers file for ansible-role-oco
+
+- name: oco restart
+  command: "{{ oco_install_path }}/bin/oco restart"

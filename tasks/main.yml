@@ -1,3 +1,22 @@
 ---
 # tasks file for ansible-role-oco
 
+- name: Upload and extract oco package
+  unarchive: src="{{ oco_package }}" dest="{{ oco_unpack_path }}" remote_src="{{ oco_package_remote_src }}" creates="{{ oco_unpack_path }}/oco-ded/install.sh"
+
+- name: Install oco package
+  command: ./install.sh
+  args:
+    chdir: "{{ oco_unpack_path }}/oco-ded"
+    creates: "{{ oco_install_path }}/bin/oco"
+
+- name: Remove default http test from 60sec
+  file: path="{{ oco_install_path }}/bin/60sec/http" state=absent
+  notify: oco restart
+
+- name: Remove default http test result
+  file: path="{{ oco_install_path }}/result/http" state=absent
+  notify: oco restart
+
+- name: Activate custom checks by crontab every minutes
+  template: src=oco_check.j2 dest="{{ oco_install_path }}/bin/60sec/customs" mode=700
