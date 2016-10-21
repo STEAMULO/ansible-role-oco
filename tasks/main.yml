@@ -20,3 +20,11 @@
 
 - name: Activate custom checks by crontab every minutes
   template: src=oco_check.j2 dest="{{ oco_install_path }}/bin/60sec/customs" mode=700
+
+- name: Activate oco customs logs in syslog
+  lineinfile:
+    line: "if $programname == '{{ oco_rsyslog_progname }}' then /var/log/{{ oco_rsyslog_progname }}.log"
+    regexp: "^if \\$programname"
+    dest: "/etc/rsyslog.d/oco_check.conf"
+    create: true
+  notify: rsyslog restart

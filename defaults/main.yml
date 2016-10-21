@@ -7,3 +7,5 @@ oco_unpack_path: "/tmp"
 oco_install_path: "/usr/local/oco"
 
 oco_checks: []
+
+oco_rsyslog_progname: oco_customs

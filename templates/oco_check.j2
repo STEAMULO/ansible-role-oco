@@ -1,7 +1,5 @@
 #!/bin/sh
 
-LOGFILE=/var/log/oco_customs.log
-
 {
 
 {% for check in oco_checks %}
@@ -10,4 +8,4 @@ echo "[$(date +%Y-%m-%d:%H:%M:%S)] Running '{{ check.command }} | tee {{ oco_ins
 echo "\n[$(date +%Y-%m-%d:%H:%M:%S)] Done '{{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }}'\n"
 {% endfor %}
 
-} >> $LOGFILE 2>&1
+} 2>&1 | logger -t {{ oco_rsyslog_progname }}

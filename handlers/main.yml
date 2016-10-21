@@ -3,3 +3,6 @@
 
 - name: oco restart
   command: "{{ oco_install_path }}/bin/oco restart"
+
+- name: rsyslog restart
+  service: name=rsyslog state=restarted
