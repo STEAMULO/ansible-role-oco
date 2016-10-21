@@ -3,9 +3,9 @@
 {
 
 {% for check in oco_checks %}
-echo "Running '{{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }}'"
-{{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }}
-echo "Done '{{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }}'\n"
+echo "[{{ check.name }}] Running '{{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }}'"
+RESULT=$({{ check.command }} | tee {{ oco_install_path }}/result/{{ check.name }})
+echo "[{{ check.name }}] Result: '$RESULT'"
 {% endfor %}
 
 } 2>&1 | logger -t {{ oco_rsyslog_progname }}
